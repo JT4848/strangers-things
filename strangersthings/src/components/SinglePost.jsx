@@ -18,7 +18,7 @@ console.log(selectedPost)
           <h4>{selectedPost.price}</h4>
           <h4>{selectedPost.willDeliver}</h4>
           <h4>Post id: {selectedPost._id}</h4>
-          <Link to='/posts' className='backToMarketplaceLink'>Back to marketplace</Link>
+          <Link to='/posts' className='singlePostMarketplaceLink'>Back to marketplace</Link>
         </section>
         )
       }
