@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 
 
 
-const AllPosts = () => {
+const AllPosts = ({ handleDetailsClick }) => {
   const [forSalePosts, setForSalePosts] = useState([]);
   
   const cohortName = "2306-FSA-ET-WEB-FT-SF";
@@ -15,7 +16,7 @@ const AllPosts = () => {
       setForSalePosts(data.data.posts)
     }
     fetchProducts();
-  })
+  }, [])
 
 
   return(
@@ -28,7 +29,8 @@ const AllPosts = () => {
               <h6>{forSale.description}</h6>
               <h6>Price: {forSale.price}</h6>
               <h2>{forSale.willDeliver}</h2>
-              <button>Details</button>
+              {/* <button onClick={() => handleDetailsClick(forSale._id)}>Details</button> */}
+              <Link onClick={() => handleDetailsClick(forSale)} to ={`/details/${forSale._id}`}>Details</Link>
             </section>
           )
         })
