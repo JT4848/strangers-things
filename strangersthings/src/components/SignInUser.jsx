@@ -1,9 +1,8 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 
-
-
-const SignInUser = () => {
+const SignInUser = ({setMyToken}) => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -29,9 +28,10 @@ const SignInUser = () => {
       const data = await response.json();
       console.log(data)
       if(data.success){
-        setUsername({username: ''});
-        setPassword({password: ''})
-        alert(`user signed in successfully ${data.message}`)
+        setUsername('');
+        setPassword('')
+        setMyToken(data.data.token)
+        alert(`user signed in successfully ${data.data.message}`)
       }
       else{
         console.log(`couldnt sign in user :/`)
@@ -39,6 +39,7 @@ const SignInUser = () => {
   }
   return(
     <>
+    <h1>Sign in</h1>
       <form onSubmit={signInUser}>
         <label>
           Username: <input value={username} onChange={e => setUsername(e.target.value)}/>
@@ -48,6 +49,7 @@ const SignInUser = () => {
         </label>
         <button>Submit</button>
       </form>
+      <Link to='/posts' className='signInMarketplaceLink'>Back to marketplace</Link>
     </>
   )
 }

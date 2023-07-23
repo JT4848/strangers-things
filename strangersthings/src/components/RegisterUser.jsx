@@ -4,7 +4,7 @@ import { useState } from "react";
 
 
 
-const RegisterUser = () => {
+const RegisterUser = ({ setMyToken }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -30,9 +30,10 @@ const RegisterUser = () => {
       const data = await response.json();
       console.log(data)
       if(data.success){
-        setUsername({username: ''});
-        setPassword({password: ''})
-        alert(`user registered successfully ${data.message}`)
+        setUsername('');
+        setPassword('')
+        setMyToken(data.data.token)
+        alert(`user registered successfully ${data.data.message}`)
       }
       else{
         console.log(`couldnt create new user :/`)
@@ -41,6 +42,7 @@ const RegisterUser = () => {
     
   return(
     <>
+    <h1>Sign up</h1>
       <form onSubmit={registerUser}>
         <label>
           Username: <input value={username} onChange={(e) => setUsername(e.target.value)}/>
