@@ -10,14 +10,13 @@ const AllPosts = ({ handleDetailsClick }) => {
   const API_URL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchPosts = async () => {
       const response = await fetch(`${API_URL}/posts`)
       const data = await response.json();
       setForSalePosts(data.data.posts)
     }
-    fetchProducts();
+    fetchPosts();
   }, [])
-
 
   return(
     <>

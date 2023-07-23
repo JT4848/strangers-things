@@ -7,7 +7,7 @@ import SinglePost from './components/SinglePost'
 import RegisterUser from './components/RegisterUser'
 import SignInUser from './components/SignInUser'
 import UserPosts from './components/UserPosts'
-import DeletePost from './components/DeletePost'
+
 
 const App = () => {
   const [selectedPost, setSelectedPost] = useState(null);
