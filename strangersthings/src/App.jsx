@@ -31,12 +31,11 @@ console.log(`app.jsx token ${mytoken}`)
     </nav>
     <Routes>
       <Route path='/' element={<Homepage />}/>
-      <Route path='/posts' element={<AllPosts handleDetailsClick={handleDetailsClick}/>}/>
-      <Route path='/details/:id' element={<SinglePost selectedPost={selectedPost}/>}/>
+      <Route path='/posts' element={<AllPosts handleDetailsClick={handleDetailsClick} mytoken={mytoken}/>}/>
+      <Route path='/details/:id' element={<SinglePost selectedPost={selectedPost} mytoken={mytoken}/>}/>
       <Route path='/users/register' element={<RegisterUser setMyToken={setMyToken}/>} />
       <Route path='/users/login' element={<SignInUser setMyToken={setMyToken}/>}/>
       <Route path='/user/post' element={<UserPosts mytoken={mytoken}/>}/>
-      <Route path='/user/delete' element={<DeletePost />}/>
     </Routes>
     </>
   )
