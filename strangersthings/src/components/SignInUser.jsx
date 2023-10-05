@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const SignInUser = ({setMyToken}) => {
+  const navigate = useNavigate();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -26,30 +27,28 @@ const SignInUser = ({setMyToken}) => {
         })
       })
       const data = await response.json();
-      console.log(data)
       if(data.success){
         setUsername('');
         setPassword('')
         setMyToken(data.data.token)
-        alert(`user signed in successfully ${data.data.message}`)
+        navigate('/');
       }
       else{
-        console.log(`couldnt sign in user :/`)
+        alert(`couldnt sign in user :/`)
       }
   }
   return(
     <>
     <h1>Sign in</h1>
-      <form onSubmit={signInUser}>
+      <form onSubmit={signInUser} className="user-post-form">
         <label>
           Username: <input value={username} onChange={e => setUsername(e.target.value)}/>
         </label>
         <label>
-          Password: <input value={password} onChange={e => setPassword(e.target.value)}/>
+          Password: <input type="password" value={password} onChange={e => setPassword(e.target.value)}/>
         </label>
         <button>Submit</button>
       </form>
-      <Link to='/posts' className='signInMarketplaceLink'>Back to marketplace</Link>
     </>
   )
 }

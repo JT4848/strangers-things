@@ -7,27 +7,38 @@ import SinglePost from './components/SinglePost'
 import RegisterUser from './components/RegisterUser'
 import SignInUser from './components/SignInUser'
 import UserPosts from './components/UserPosts'
-
+import LogoutButton from './components/LogoutButton';
 
 const App = () => {
   const [selectedPost, setSelectedPost] = useState(null);
   const [mytoken, setMyToken] = useState(null);
 
   const handleDetailsClick = (post) => {
-    console.log(post);
     setSelectedPost(post);
   }
 
-console.log(`app.jsx token ${mytoken}`)
+  const handleLogout = () => {
+    setMyToken(null);
+  }
+
   return (
     <>
     <h2 className='myLinks'>Marketplace</h2>
     <nav>
       <Link to='/' className='myLinks'>Home</Link>
       <Link to='/posts' className='myLinks'>Marketplace</Link>
-      <Link to='/user/post' className='myLinks'>Sell</Link>
-      <Link to='/users/register' className='myLinks'>Sign up</Link>
-      <Link to='/users/login' className='myLinks'>Sign in</Link>
+      {mytoken ? (
+        <>
+        <Link to='/user/post' className='myLinks'>Sell</Link>
+        <LogoutButton handleLogout={handleLogout} />
+        </>
+      ) : null}
+      {mytoken ? null : (
+        <>
+          <Link to='/users/register' className='myLinks'>Sign up</Link>
+          <Link to='/users/login' className='myLinks'>Sign in</Link>
+        </>
+      )}
     </nav>
     <Routes>
       <Route path='/' element={<Homepage />}/>

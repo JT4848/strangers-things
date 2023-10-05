@@ -20,20 +20,23 @@ const AllPosts = ({ handleDetailsClick }) => {
 
   return(
     <>
+    <div className="posts-container">
       {
         forSalePosts.map((forSale) => {
           return(
+            <div className="post-card" key={forSale._id}>
             <section key={forSale._id}>
               <h2>{forSale.title}</h2>
               <h6>{forSale.description}</h6>
               <h6>Price: {forSale.price}</h6>
               <h2>{forSale.willDeliver}</h2>
-              {/* <button onClick={() => handleDetailsClick(forSale._id)}>Details</button> */}
               <Link onClick={() => handleDetailsClick(forSale)} to ={`/details/${forSale._id}`}>Details</Link>
             </section>
+            </div>
           )
         })
       }
+      </div>
     </>
   )
 }

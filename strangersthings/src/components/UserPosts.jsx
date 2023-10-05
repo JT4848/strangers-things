@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 
@@ -10,11 +10,14 @@ const UserPosts = ({ mytoken }) => {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [willDeliver, setWillDeliver] = useState('');
+  const navigate = useNavigate();
 
   const cohortName = "2306-FSA-ET-WEB-FT-SF";
   const API_URL = `https://strangers-things.herokuapp.com/api/${cohortName}`;
 
-
+  if(!mytoken){
+    navigate('/')
+  }
 
   const userPosts = async (e) => {
     console.log(mytoken)
@@ -35,22 +38,21 @@ const UserPosts = ({ mytoken }) => {
       })
     })
     const data = await repsonse.json();
-    console.log(data)
     if(data.success){
       setTitle('')
       setDescription('');
       setPrice('');
       setWillDeliver('');
       alert(`${title} was successfully created :)`)
+      navigate("/posts");
     }
     else{
       alert(`Could not post item`)
     }
   }
-  console.log(`userposts token ${mytoken}`)
   return(
     <>
-      <form onSubmit={userPosts}>
+      <form onSubmit={userPosts} className="user-post-form">
         <label>
           Title: <input value={title} onChange={e => setTitle(e.target.value)}/>
         </label>
@@ -65,7 +67,6 @@ const UserPosts = ({ mytoken }) => {
         </label>
         <button>Submit</button>
       </form>
-      <Link to='/posts' className='userPostMarketplaceLink'>Back to marketplace</Link>
     </>
   )
 }
